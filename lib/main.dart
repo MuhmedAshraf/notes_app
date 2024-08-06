@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/Core/helper/api_helper/api_consumer.dart';
 import 'package:notes_app/Core/helper/api_helper/dio_consumer.dart';
-import 'package:notes_app/Core/helper/cach_helper/cache_helper.dart';
+import 'package:notes_app/Core/helper/cache_helper/cache_helper.dart';
 import 'package:notes_app/Features/01.auth/presentation/controller/cubit/user_cubit.dart';
 import 'package:notes_app/Features/01.auth/presentation/views/welcome_screen.dart';
 

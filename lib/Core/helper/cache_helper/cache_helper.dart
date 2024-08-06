@@ -1,4 +1,8 @@
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../Features/01.auth/data/models/user_model.dart';
+
 
 class CacheHelper {
   static late SharedPreferences sharedPreferences;
@@ -64,5 +68,16 @@ class CacheHelper {
     } else {
       return await sharedPreferences.setInt(key, value);
     }
+  }
+
+  //! cache user
+
+  void cacheUser(Map<String, dynamic> user) {
+    saveData(key: 'user', value: json.encode(user));
+  }
+
+   UserModel getUser() {
+    var user = getData(key: 'user');
+    return UserModel.fromJson(json.decode(user.toString()));
   }
 }

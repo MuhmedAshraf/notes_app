@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:notes_app/Core/helper/api_helper/api_consumer.dart';
-import 'package:notes_app/Core/helper/cach_helper/cache_helper.dart';
-import 'package:notes_app/Features/01.auth/data/models/UserModel.dart';
+import 'package:notes_app/Core/helper/cache_helper/cache_helper.dart';
 import 'package:notes_app/Features/01.auth/presentation/controller/cubit/user_state.dart';
-
 import '../../../../../Core/helper/error/exceptions.dart';
+import '../../../data/models/user_model.dart';
 
 class UserCubit extends Cubit<UserState> {
   UserCubit({required this.api}) : super(UserInitial());
@@ -52,10 +50,10 @@ class UserCubit extends Cubit<UserState> {
       emit(SignInFailure(errMessage: e.errorModel.message));
     }
   }
-  signUp()async {
+  signUp() async {
     try {
       emit(SignUpLoading());
-      final response = await api.post('/auth/register',data: {
+      final response = await api.post('/auth/register', data: {
         "email": signUpEmail.text,
         "password": signUpPassword.text,
         "name": signUpName.text,
@@ -65,7 +63,7 @@ class UserCubit extends Cubit<UserState> {
       CacheHelper().saveData(key: "token", value: user.token);
       print(CacheHelper().getData(key: 'token'));
     } on ServerException catch (e) {
-    emit(SignUpFailure(errMessage: e.errorModel.message));
+      emit(SignUpFailure(errMessage: e.errorModel.message));
     }
   }
 }
